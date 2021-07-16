@@ -1,3 +1,7 @@
+# App
+
+-   restructure components as class components
+
 # Features
 
 -   get and render playlists
