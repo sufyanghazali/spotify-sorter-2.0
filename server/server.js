@@ -88,7 +88,6 @@ app.get("/callback", (req, res) => {
     }
 });
 
-
 app.get("/refresh_token", (req, res) => {
     const { refresh } = req.query;
 
@@ -112,6 +111,10 @@ app.get("/refresh_token", (req, res) => {
         .catch(err => {
             console.log(err.message);
         })
+});
+
+app.get("/playlists/:playlistId", (req, res) => {
+    const { playlist } = req.params;
 })
 
 app.listen(PORT, () => {
