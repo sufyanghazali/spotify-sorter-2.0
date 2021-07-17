@@ -1,17 +1,11 @@
 import React from 'react';
+import Song from './Song';
 
-function Playlist(props) {
-    const { songs } = props;
-
-    console.log(songs)
+function Playlist({ songs }) {
     const listItems = songs.map(song => (
-        <li key={song.track.id}>
-            {song.track.name}
-        </li>
+        <Song song={song} key={song.track.id} />
     ))
 
-
-    console.log(listItems)
     return (
         <ul>{listItems}</ul>
     )

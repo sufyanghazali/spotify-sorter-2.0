@@ -3,7 +3,7 @@ import PlaylistItem from './PlaylistItem';
 
 function Playlists({ playlists, onPlaylistSelect }) {
     const list = playlists.map(playlist => {
-        return <PlaylistItem playlist={playlist} onPlaylistSelect={onPlaylistSelect} />
+        return <PlaylistItem playlist={playlist} onPlaylistSelect={onPlaylistSelect} key={playlist.id} />
 
     })
 
