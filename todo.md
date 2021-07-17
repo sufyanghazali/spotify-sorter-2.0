@@ -4,12 +4,13 @@
 
 # Features
 
--   get and render playlists
--   get and render songs from playlist
--   sort playlist and render changes
+-   get and render playlists **DONE**
+-   get and render songs from playlist **DONE**
+-   sort playlist and render changes **DONE**
 -   save sorted playlist
 
 # Components
 
--   playlists
--   playlist songs
+-   playlists **DONE**
+-   playlist songs **DONE**
+-   could probably refactor SortButton and SaveButton into one component
