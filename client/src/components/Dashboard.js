@@ -32,11 +32,29 @@ class Dashboard extends React.Component {
     }
 
     onPlaylistSelect = async playlist => {
-        const songs = await axios.get(playlist.href, {
+        const response = await axios.get(playlist.tracks.href, {
             headers: {
                 Authorization: `Bearer ${ this.props.access_token }`
             }
-        }).then(res => res.data.tracks.items);
+        });
+
+        let songs = response.data.items;
+
+        while (songs.length < response.data.total) {
+            const res = await axios.get(playlist.tracks.href, {
+                params: {
+                    offset: songs.length,
+                    limit: 100
+                },
+                headers: {
+                    Authorization: `Bearer ${ this.props.access_token }`
+                }
+            }).then(res => res.data.items)
+
+            songs = songs.concat(res);
+        }
+
+        console.log(songs);
 
         this.setState({
             selectedPlaylist: playlist,

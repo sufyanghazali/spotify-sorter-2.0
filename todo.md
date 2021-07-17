@@ -1,13 +1,15 @@
 # App
 
--   restructure components as class components
+-   restructure components as class components **DONE**
 
 # Features
 
+-   refine compare() so that songs with same release date are ordered by album order
 -   get and render playlists **DONE**
 -   get and render songs from playlist **DONE**
 -   sort playlist and render changes **DONE**
--   save sorted playlist
+-   save sorted playlist **DONE**
+-   get full list of songs from playlist **DONE**
 
 # Components
 
