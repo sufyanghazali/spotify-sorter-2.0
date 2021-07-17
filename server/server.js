@@ -3,6 +3,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const querystring = require("querystring");
+const path = require('path');
 
 const PORT = process.env.PORT || 3001;
 require("dotenv").config();
@@ -30,6 +31,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "builds")))
 
 app.get("/login", (req, res) => {
     console.log("/login hit")
@@ -114,6 +116,10 @@ app.get("/refresh_token", (req, res) => {
 
 app.get("/playlists/:playlistId", (req, res) => {
     const { playlist } = req.params;
+})
+
+app.get("/*", (req, res) => {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
 })
 
 app.listen(PORT, () => {
