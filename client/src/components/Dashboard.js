@@ -14,8 +14,30 @@ class Dashboard extends React.Component {
         }
     }
 
-    onPlaylistSelect = playlist => {
-        this.setState({ selectedPlaylist: playlist });
+    async componentDidMount() {
+        const response = await axios.get("https://api.spotify.com/v1/me/playlists", {
+            headers: {
+                Authorization: `Bearer ${ this.props.access_token }`
+            }
+        }).then(res => res.data.items);
+
+        this.setState({
+            playlists: response
+        })
+    }
+
+    onPlaylistSelect = async playlist => {
+        const songs = await axios.get(playlist.href, {
+            headers: {
+                Authorization: `Bearer ${ this.props.access_token }`
+            }
+        }).then(res => res.data.tracks.items);
+
+
+        this.setState({
+            selectedPlaylist: playlist,
+            songs: songs
+        });
     }
 
     render() {
@@ -23,11 +45,11 @@ class Dashboard extends React.Component {
             <div className="ui container">
                 <div className="ui grid">
                     <div className="ui row">
-                        <div className="five wide column">
-                            <Playlist songs={this.state.songs} />
-                        </div>
-                        <div className="eleven wide column">
+                        <div className="three wide column">
                             <Playlists playlists={this.state.playlists} onPlaylistSelect={this.onPlaylistSelect} />
+                        </div>
+                        <div className="thirteen wide column">
+                            <Playlist songs={this.state.songs} />
                         </div>
                     </div>
                 </div>
@@ -35,3 +57,5 @@ class Dashboard extends React.Component {
         )
     }
 }
+
+export default Dashboard;

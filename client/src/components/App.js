@@ -1,5 +1,4 @@
 import React from 'react';
-import "bootstrap/dist/css/bootstrap.min.css"
 import Dashboard from './Dashboard';
 import Login from './Login';
 

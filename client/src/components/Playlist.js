@@ -1,11 +1,12 @@
 import React from 'react';
 
-function Songs(props) {
+function Playlist(props) {
     const { songs } = props;
 
+    console.log(songs)
     const listItems = songs.map(song => (
-        <li key={song.id}>
-            {song.name}
+        <li key={song.track.id}>
+            {song.track.name}
         </li>
     ))
 
@@ -17,4 +18,4 @@ function Songs(props) {
 
 }
 
-export default Songs;
+export default Playlist;
