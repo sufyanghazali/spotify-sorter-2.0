@@ -31,7 +31,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "builds")))
+app.use(express.static(path.join(__dirname, "build")))
 
 app.get("/login", (req, res) => {
     console.log("/login hit")
