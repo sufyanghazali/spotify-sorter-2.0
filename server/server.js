@@ -124,11 +124,6 @@ app.get("/refresh_token", (req, res) => {
         })
 });
 
-app.get("/playlists/:playlistId", (req, res) => {
-    const { playlist } = req.params;
-})
-
-
 app.listen(PORT, () => {
     console.log(`Server up. Listening on port ${ PORT }`)
 })
