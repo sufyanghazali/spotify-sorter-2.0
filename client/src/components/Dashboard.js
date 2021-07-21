@@ -71,28 +71,48 @@ class Dashboard extends React.Component {
         });
     }
 
-    onSaveButtonClicked = () => {
+    onSaveButtonClicked = async () => {
+        // TODO: for playlists.length > 100, first request should be PUT, then subsequent requests should POST
+
         if (this.state.sorted) {
             const songs = this.state.songs;
             const uris = songs.map(song => song.track.uri);
-            axios.put(`https://api.spotify.com/v1/playlists/${ this.state.selectedPlaylist.id }/tracks`, {
-                uris: uris
+
+            await axios.put(`https://api.spotify.com/v1/playlists/${ this.state.selectedPlaylist.id }/tracks`, {
+                uris: uris.slice(0, 100)
             }, {
                 headers: {
                     Authorization: `Bearer ${ this.props.access_token }`
-                },
-            }).catch(function(error) {
-                if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    console.log(error.request);
-                } else {
-                    console.log('Error', error.message);
                 }
-                console.log(error.config);
-            });
+            })
+                .then(async () => {
+                    if (uris.length > 100) {
+                        let counter = 100;
+                        while (counter < uris.length) {
+                            await axios.post(`https://api.spotify.com/v1/playlists/${ this.state.selectedPlaylist.id }/tracks`, {
+                                uris: uris.slice(counter, counter + 100)
+                            }, {
+                                headers: {
+                                    Authorization: `Bearer ${ this.props.access_token }`
+                                }
+                            });
+
+                            counter += 100;
+                        }
+                    }
+                })
+                .catch(function(error) {
+                    if (error.response) {
+                        console.log(error.response.data);
+                        console.log(error.response.status);
+                        console.log(error.response.headers);
+                    } else if (error.request) {
+                        console.log(error.request);
+                    } else {
+                        console.log('Error', error.message);
+                    }
+                    console.log(error.config);
+                });
 
             this.setState({ sorted: false });
         }

@@ -33,7 +33,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "build")))
 
-app.get("/*", (req, res) => {
+app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "build", "index.html"));
 })
 
@@ -41,6 +41,7 @@ app.get("/*", (req, res) => {
 app.get("/login", (req, res) => {
     console.log("/login hit")
     const state = generateRandomString(16);
+    console.log(state);
     res.cookie(stateKey, state);
 
     const scope = "playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative";
@@ -63,6 +64,10 @@ app.get("/callback", (req, res) => {
     const state = req.query.state || null;
     const storedState = req.cookies ? req.cookies[stateKey] : null;
     const encoded = Buffer.from(`${ client_id }:${ client_secret }`).toString("base64");
+
+    console.log(state);
+    console.log(storedState);
+
 
     if (state === null || state !== storedState) {
         res.redirect("/#" + querystring.stringify({
