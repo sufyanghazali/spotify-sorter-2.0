@@ -124,14 +124,14 @@ class Dashboard extends React.Component {
 
     render() {
         return (
-            <Container id="dashboard">
+            <Container className="dashboard">
                 <Row>
                     <Col md={3}>
                         <Playlists playlists={this.state.playlists} onPlaylistSelect={this.onPlaylistSelect} selectedPlaylist={this.state.selectedPlaylist} />
                     </Col>
-                    <Col md={7}>
-                        {this.state.selectedPlaylist ? <h2 className="header-playlist">{this.state.selectedPlaylist.name}</h2> : null}
-                        <Playlist className="playlist" songs={this.state.songs} />
+                    <Col fluid>
+                        {this.state.selectedPlaylist ? <Playlist songs={this.state.songs} name={this.state.selectedPlaylist.name} /> : null}
+                        {/* <Playlist songs={this.state.songs} name={this.state.selectedPlaylist.name} /> */}
                     </Col>
                     {this.state.selectedPlaylist ?
                         <Col md={2}>
