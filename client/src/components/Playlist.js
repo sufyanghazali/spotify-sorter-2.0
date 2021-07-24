@@ -1,4 +1,5 @@
 import React from 'react';
+import ListGroup from 'react-bootstrap/ListGroup';
 import Song from './Song';
 
 function Playlist({ songs }) {
@@ -7,7 +8,7 @@ function Playlist({ songs }) {
     ))
 
     return (
-        <ul>{listItems}</ul>
+        <ListGroup>{listItems}</ListGroup>
     )
 
 }

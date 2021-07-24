@@ -1,15 +1,19 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import ListGroup from 'react-bootstrap/ListGroup';
+
 
 function Song({ song }) {
     return (
-        <div className="ui item grid">
-            <div className="content nine wide column">
-                <div className="header">{song.track.name}</div>
-            </div>
-            <div className="content five wide column">
-                <div className="description">{song.track.artists[0].name}</div>
-            </div>
-        </div>
+        <ListGroup.Item className="song">
+            <Container>
+                <Row>
+                    <div className="song-title">{song.track.name}</div>
+                    <div className="song-artist">{song.track.artists[0].name}</div>
+                </Row>
+            </Container>
+        </ListGroup.Item>
     )
 }
 

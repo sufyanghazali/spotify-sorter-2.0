@@ -1,8 +1,11 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
 
 function SortButton({ onClick }) {
     return (
-        <button className="ui button primary" onClick={() => onClick()}>Sort</button>
+        <Button variant="primary" onClick={() => onClick()}>
+            Sort
+        </Button>
     )
 }
 
