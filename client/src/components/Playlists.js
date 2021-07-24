@@ -16,7 +16,7 @@ function Playlists({ playlists, onPlaylistSelect, selectedPlaylist }) {
 
     return (
         // <div className="ui relaxed divided list">{list}</div>
-        <ListGroup id="playlists">{list}</ListGroup>
+        <ListGroup className="playlists">{list}</ListGroup>
     );
 }
 
