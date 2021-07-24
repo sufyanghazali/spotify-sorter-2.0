@@ -1,12 +1,14 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
 
 function Login() {
     return (
-        <div>
-            <a className="btn btn-success btn-lg" href="https://spotify-sorting-app.herokuapp.com/login">
+        <div className="login-container">
+            <h1 className="login-header">Sortify</h1>
+            <Button className="spotify spotify-btn spotify-btn-login" href="https://spotify-sorting-app.herokuapp.com/login">
                 Login with Spotify
-            </a>
-        </div>
+            </Button>
+        </div >
 
     )
 }

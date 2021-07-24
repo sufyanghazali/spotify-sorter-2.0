@@ -3,6 +3,10 @@ import axios from "axios";
 import '../index.css';
 import { compare } from '../utils/sort';
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 import Playlist from './Playlist';
 import Playlists from './Playlists';
 import SortButton from './SortButton';
@@ -120,22 +124,25 @@ class Dashboard extends React.Component {
 
     render() {
         return (
-            <div className="ui container dashboard">
-                <div className="ui grid">
-                    <div className="ui row">
-                        <div className="three wide column">
-                            <Playlists playlists={this.state.playlists} onPlaylistSelect={this.onPlaylistSelect} />
-                        </div>
-                        <div className="ten wide column">
-                            <Playlist songs={this.state.songs} />
-                        </div>
-                        <div className="three wide column">
-                            <SortButton onClick={this.onSortButtonClicked} />
-                            <SaveButton onClick={this.onSaveButtonClicked} sorted={!this.state.sorted} />
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Container id="dashboard">
+                <Row>
+                    <Col md={3}>
+                        <Playlists playlists={this.state.playlists} onPlaylistSelect={this.onPlaylistSelect} selectedPlaylist={this.state.selectedPlaylist} />
+                    </Col>
+                    <Col md={7}>
+                        {this.state.selectedPlaylist ? <h2 className="header-playlist">{this.state.selectedPlaylist.name}</h2> : null}
+                        <Playlist className="playlist" songs={this.state.songs} />
+                    </Col>
+                    {this.state.selectedPlaylist ?
+                        <Col md={2}>
+                            <div className="buttons">
+                                <SortButton onClick={this.onSortButtonClicked} />
+                                <SaveButton onClick={this.onSaveButtonClicked} sorted={!this.state.sorted} />
+                            </div>
+                        </Col> : null
+                    }
+                </Row>
+            </Container>
         )
     }
 }
