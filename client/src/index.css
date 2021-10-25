@@ -89,10 +89,23 @@ ul {
 }
 
 .playlist-header {
-    font-size: 76px;
-    font-weight: 700;
+    display: flex;
+    flex-direction: row;
     color: #ffffff;
     margin-bottom: 32px;
+}
+
+.playlist-image {
+    width: 192px;
+    margin-right: 2rem;
+}
+
+.playlist-image img {
+    width: 100%;
+}
+.playlist-name {
+    font-size: 76px;
+    font-weight: 700;
 }
 
 .song {
@@ -143,7 +156,7 @@ ul {
 }
 
 .login-container {
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;

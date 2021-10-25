@@ -129,8 +129,8 @@ class Dashboard extends React.Component {
                     <Col md={3}>
                         <Playlists playlists={this.state.playlists} onPlaylistSelect={this.onPlaylistSelect} selectedPlaylist={this.state.selectedPlaylist} />
                     </Col>
-                    <Col fluid>
-                        {this.state.selectedPlaylist ? <Playlist songs={this.state.songs} name={this.state.selectedPlaylist.name} /> : null}
+                    <Col>
+                        {this.state.selectedPlaylist ? <Playlist songs={this.state.songs} metadata={this.state.selectedPlaylist} /> : null}
                         {/* <Playlist songs={this.state.songs} name={this.state.selectedPlaylist.name} /> */}
                     </Col>
                     {this.state.selectedPlaylist ?
