@@ -50,32 +50,21 @@ ul {
 }
 
 #root,
-.dashboard,
-.dashboard > .row {
-    min-height: 100vh;
-    /* max-height: 100%; */
-}
-
-.container,
-.row {
-    padding: 0;
-    margin: 0;
+.dashboard {
+    height: 100%;
 }
 
 .dashboard {
-    margin: 0;
+    display: grid;
+    position: relative;
+    grid-template-columns: minmax(240px, auto) 1fr;
 }
 
 .playlists {
-    padding-top: 96px;
+    padding-top: 6rem;
     padding-left: 32px;
-    max-width: 300px;
-    height: 100%;
+    padding-right: 2rem;
     background-color: #000000;
-}
-
-.row > * {
-    padding: 0;
 }
 
 .list-group-item {
@@ -83,29 +72,34 @@ ul {
 }
 
 .playlist {
-    height: 100%;
-    padding-top: 5rem;
+    padding-top: 6rem;
     padding-left: 3rem;
+    overflow: scroll;
 }
 
 .playlist-header {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 2rem;
+    align-items: start;
     color: #ffffff;
-    margin-bottom: 32px;
+    margin-bottom: 2rem;
+}
+
+.playlist--button-exit {
+    display: none;
 }
 
 .playlist-image {
     width: 192px;
-    margin-right: 2rem;
 }
 
 .playlist-image img {
     width: 100%;
 }
 .playlist-name {
-    font-size: 76px;
-    font-weight: 700;
+    font-size: 4rem;
+    font-weight: 500;
 }
 
 .song {
@@ -189,15 +183,77 @@ ul {
 }
 
 .buttons {
-    margin-top: 6rem;
+    grid-column-start: 2;
+    grid-row-start: 2;
 }
 
 .buttons .btn {
     margin-right: 8px;
 }
 
+.button-back {
+    height: 22px;
+    opacity: 1;
+    width: 22px;
+    stroke-width: 1pt;
+}
+
+.button-back polyline {
+    stroke: #fff;
+}
+
 .btn:focus {
-    /* border: initial; */
     outline: none;
     box-shadow: none;
+}
+
+@media (max-width: 768px) {
+    .dashboard {
+        grid-template-columns: 100%;
+        overflow: auto;
+    }
+
+    .playlist {
+        position: absolute;
+        width: 100%;
+        min-height: 100%;
+        background-color: rgb(33, 37, 41);
+        animation-duration: 0.5s;
+        animation-name: slidein;
+    }
+
+    .playlist--button-exit {
+        display: flex;
+        height: 32px;
+        width: 32px;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        background-color: rgba(0, 0, 0, 0.7);
+        border: none;
+        border-radius: 50%;
+    }
+
+    .playlist-header {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+    }
+}
+
+@keyframes slidein {
+    from {
+        transform: translateX(100%);
+        opacity: 0%;
+    }
+
+    20% {
+        opacity: 0%;
+    }
+
+    to {
+        transform: translateX(0%);
+        opacity: 100%;
+    }
 }
